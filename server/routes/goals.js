@@ -63,7 +63,7 @@ router.delete('/:id', authenticateToken, async (req, res) => {
         if (!goal || goal.userId.toString() !== req.user.id) {
             return res.sendStatus(404);
         }
-        await goal.remove();
+        await Goal.findByIdAndDelete(goal._id);
         res.json({ message: 'Goal deleted' });
     } catch (err) {
         res.status(500).json({ message: err.message });
